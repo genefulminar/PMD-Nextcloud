@@ -5,41 +5,41 @@ services:
     image: tiredofit/freescout
     container_name: freescout-app
     ports:
-    - 80:80
+    - 8080:80
     links:
     - freescout-db
     volumes:
     ### If you want to perform customizations to the source and have access to it, then uncomment this line - This includes modules
     #- ./data:/www/html
     ### Or, if you just want to use Stock Freescout and hold onto persistent files like cache and session use this, one or the other.
-    - ./data:/data
+    - /mnt/data:/data
     ### If you want to just keep the original source and add additional modules uncomment this line
-    - ./modules:/www/html/Modules
-    - ./logs/:/www/logs
+    - /mnt/modules:/www/html/Modules
+    - /mnt/logs/:/www/logs
     environment:
     - CONTAINER_NAME=freescout-app
     - DB_HOST=freescout-db
     - DB_NAME=freescout
-    - DB_USER=freescout # feel free to change this to a different user.
+    - DB_USER=admin # feel free to change this to a different user.
     - DB_PASS=< some long strong password >
-    - SITE_URL=http://< local ip of yoru machine >:< port on left above >
-    - ADMIN_EMAIL=< your preferred email address >
-    - ADMIN_PASS=< a long strong password again >
+    - SITE_URL=http://hostip:8080
+    - ADMIN_EMAIL=pmdit823@gmail.com
+    - ADMIN_PASS=M@pagmalasakit
     - ENABLE_SSL_PROXY=FALSE
     - DISPLAY_ERRORS=FALSE
-    - TIMEZONE=America/Chicago # change to your timezone
+    - TIMEZONE=Asia/Manila # change to your timezone
     restart: always
     
   freescout-db:
     image: tiredofit/mariadb
     container_name: freescout-db
     volumes:
-      - ./db:/var/lib/mysql
+      - /mnt/db:/var/lib/mysql
     environment:
-      - ROOT_PASS=AReallyLongStrongPasswordWithNum3r5andComplex1ty
+      - ROOT_PASS=M@pagmalasakit
       - DB_NAME=freescout
       - DB_USER=freescout  # must match the DB_USER in section above
-      - DB_PASS=< same as in section above >
+      - DB_PASS=M@pagmalasakit
       - CONTAINER_NAME=freescout-db
     restart: always
 
@@ -55,8 +55,8 @@ services:
       - DB_HOST=freescout-db
       - DB_TYPE=mariadb
       - DB_NAME=freescout
-      - DB_USER=freescout # must match the two sections above
-      - DB_PASS=< same as in sections above >
+      - DB_USER=admin # must match the two sections above
+      - DB_PASS=M@pagmalasakit
       - DB_DUMP_FREQ=1440
       - DB_DUMP_BEGIN=0000
       - DB_CLEANUP_TIME=8640
