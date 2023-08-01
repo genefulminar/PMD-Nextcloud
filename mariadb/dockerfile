@@ -1,0 +1,16 @@
+# Use the official MariaDB image as the base image
+FROM mariadb:latest
+
+# Install SSH server and generate SSH keys
+RUN apt-get update && \
+    apt-get install -y openssh-server && \
+    mkdir /var/run/sshd && \
+    echo 'root:your_ssh_password' | chpasswd && \ # Change "your_ssh_password" to your desired root password
+    ssh-keygen -A
+
+# Expose the SSH port and MariaDB port
+EXPOSE 22
+EXPOSE 3306
+
+# Start SSH and MariaDB services
+CMD service ssh start && mysqld --user=mysql --console

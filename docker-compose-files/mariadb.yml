@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  mariadb-ssh:
+    build: .  # Use the Dockerfile in the current directory
+    ports:
+      - "2222:22"   # Map host port 2222 to container SSH port 22
+      - "3306:3306" # Map host port 3306 to container MariaDB port 3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} # Use the password from .env file
+    volumes:
+      - ./data:/var/lib/mysql   # Mount a volume for persistent data storage
