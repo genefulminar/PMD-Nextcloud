@@ -5,7 +5,7 @@ ENV GOSU_VERSION 1.11
 
 RUN adduser uvdesk -q --disabled-password --gecos ""
 
-# Install base supplimentary packages
+# Install base supplementary packages
 RUN apt-get update && apt-get -y upgrade \
     && apt-get update && apt-get install -y software-properties-common && add-apt-repository -y ppa:ondrej/php \
     && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
@@ -24,10 +24,10 @@ RUN apt-get update && apt-get -y upgrade \
         php7.4-mailparse \
         ca-certificates; \
     if ! command -v gpg; then \
-		apt-get install -y --no-install-recommends gnupg2 dirmngr; \
-	elif gpg --version | grep -q '^gpg (GnuPG) 1\.'; then \
-		apt-get install -y --no-install-recommends gnupg-curl; \
-	fi;
+        apt-get install -y --no-install-recommends gnupg2 dirmngr; \
+    elif gpg --version | grep -q '^gpg (GnuPG) 1\.'; then \
+        apt-get install -y --no-install-recommends gnupg-curl; \
+    fi;
 
 COPY ./.docker/config/apache2/env /etc/apache2/envvars
 COPY ./.docker/config/apache2/httpd.conf /etc/apache2/apache2.conf
@@ -46,7 +46,7 @@ RUN \
     # Verify gosu installation
     export GNUPGHOME="$(mktemp -d)" \
     && gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
+    && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
     && gpgconf --kill all \
     && chmod +x /usr/local/bin/gosu \
     && gosu nobody true; \
@@ -58,7 +58,7 @@ RUN \
     if [ "$currentSig" != "$actualSig" ]; then \
         echo "Warning: Failed to verify composer signature."; \
         exit 1; \
-	fi; \
+    fi; \
     # Install composer
     php /usr/local/bin/composer.php --quiet --filename=/usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer; \
@@ -73,6 +73,9 @@ RUN \
         /var/www/bin \
         /var/www/html \
         /var/www/uvdesk/.docker;
+
+# Disable the Symfony web profiler
+RUN sed -i '/web_profiler/s/^/#/' /var/www/uvdesk/config/packages/dev/web_profiler.yaml
 
 # Change working directory to uvdesk source
 WORKDIR /var/www
