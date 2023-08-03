@@ -23,7 +23,7 @@ sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON glpi.* TO 'glpiuser'@'localhos
 
 # Download GLPI
 cd /tmp
-wget -O glpi.tar.gz https://github.com/glpi-project/glpi/releases/download/9.5.7/glpi-9.5.7.tgz
+wget -O glpi.tar.gz https://github.com/glpi-project/glpi/releases/download/10.0.9/glpi-10.0.9.tgz
 
 # Extract and move GLPI to the web server's document root
 sudo tar -xvzf glpi.tar.gz -C /var/www/html/
