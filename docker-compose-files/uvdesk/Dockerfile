@@ -74,8 +74,6 @@ RUN \
         /var/www/html \
         /var/www/uvdesk/.docker;
 
-# Disable the Symfony web profiler
-RUN sed -i '/web_profiler/s/^/#/' /var/www/uvdesk/config/packages/dev/web_profiler.yaml
 
 # Change working directory to uvdesk source
 WORKDIR /var/www
