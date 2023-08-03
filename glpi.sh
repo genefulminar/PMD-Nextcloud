@@ -53,7 +53,4 @@ sudo a2ensite glpi
 sudo a2enmod rewrite
 sudo systemctl restart apache2
 
-# Remove the installation directory for security purposes
-sudo rm -rf /var/www/html/glpi-install
-
 echo "GLPI installation completed. Access it at http://glpi.example.com (replace 'glpi.example.com' with your domain or IP address)."
