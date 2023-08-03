@@ -18,8 +18,8 @@ sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_nativ
 
 # Create a new database for GLPI and a user with appropriate privileges
 sudo mysql -u root -p -e "CREATE DATABASE glpi CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
-sudo mysql -u root -p -e "CREATE USER 'glpiuser'@'localhost' IDENTIFIED BY 'M@pagmalasakit';"
-sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON glpi.* TO 'glpiuser'@'localhost'; FLUSH PRIVILEGES;"
+sudo mysql -u root -p -e "CREATE USER 'admin'@'localhost' IDENTIFIED BY 'M@pagmalasakit';"
+sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON glpi.* TO 'admin'@'localhost'; FLUSH PRIVILEGES;"
 
 # Download GLPI
 cd /tmp
