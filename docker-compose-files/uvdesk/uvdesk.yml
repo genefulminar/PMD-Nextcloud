@@ -11,7 +11,11 @@ services:
       MYSQL_USER: uvdesk
       MYSQL_PASSWORD: M@pagmalasakit
   uvdesk:
-    image: nuttcorp/uvdesk:latest
+    build:
+        context: .
+        dockerfile: Dockerfile
+    volumes:
+      - /mnt/uvdeskapp:/var/www/uvdesk
     depends_on:
       - db
     tty: true
@@ -21,4 +25,4 @@ services:
         MYSQL_ROOT_PASSWORD: M@pagmalasakit
         MYSQL_DATABASE: uvdesk
     ports:
-        - 6744:80
+        - 80:80
