@@ -14,11 +14,11 @@ sudo systemctl enable mysql
 sudo systemctl start mysql
 
 # Set MySQL root password (change 'your_root_password_here' to your desired password)
-sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_root_password_here'; FLUSH PRIVILEGES;"
+sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'M@pagmalasakit'; FLUSH PRIVILEGES;"
 
 # Create a new database for GLPI and a user with appropriate privileges
 sudo mysql -u root -p -e "CREATE DATABASE glpi CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
-sudo mysql -u root -p -e "CREATE USER 'glpiuser'@'localhost' IDENTIFIED BY 'your_glpi_user_password_here';"
+sudo mysql -u root -p -e "CREATE USER 'glpiuser'@'localhost' IDENTIFIED BY 'M@pagmalasakit';"
 sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON glpi.* TO 'glpiuser'@'localhost'; FLUSH PRIVILEGES;"
 
 # Download GLPI
