@@ -3,7 +3,7 @@ services:
   db:
     image: mysql:5.7
     volumes:
-      - /mnt/uvdeskdb:/var/lib/mysql
+      - /mnt/uvdeskdb:/var/lib/mysql:rw
     restart: always
     environment:
       MYSQL_DATABASE: uvdesk
@@ -15,7 +15,7 @@ services:
         context: .
         dockerfile: Dockerfile
     volumes:
-      - /mnt/uvdeskapp:/var/www/uvdesk
+      - /mnt/uvdeskapp:/var/www:rw
     depends_on:
       - db
     tty: true
